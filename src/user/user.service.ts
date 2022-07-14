@@ -12,13 +12,20 @@ export class UserService {
   }
 
   async register(newUser: RegisterDto): Promise<RegisterUserResponse> {
-    console.log(newUser)
-    const user = new User();
-    user.email = newUser.email;
-    user.pwdHash = hashPwd(newUser.pwd);
-    await user.save();
+      const user = new User();
+      user.email = newUser.email;
+      user.pwdHash = hashPwd(newUser.pwd);
 
-    return this.filter(user);
+      // const userInBase = await User.findOne({where: {email: user.email}})
+      //
+      // if (user.email === userInBase.email) {
+      //    console.log("Taki użytkownik już istnieje!")
+      // }
+
+      await user.save();
+
+      return this.filter(user);
+
   }
 
   async getOneUser(id: string): Promise<User> {

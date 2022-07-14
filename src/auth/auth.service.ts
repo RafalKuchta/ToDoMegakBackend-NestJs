@@ -67,6 +67,7 @@ export class AuthService {
         }
     };
 
+
     async logout(user: User, res: Response) {
         console.log(user, res)
         try {

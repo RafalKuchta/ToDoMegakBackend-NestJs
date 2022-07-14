@@ -5,13 +5,8 @@ import {UpdateTaskDto} from './dto/update-task.dto';
 import {TaskInterface} from "../interfaces/task";
 import {Task} from "./entities/task.entity";
 
-import {Db} from '../db';
-import {Like} from "typeorm";
-import {AppDataSource} from "../../data-source";
-
 @Injectable()
 export class TasksService {
-
     filter(task: Task): TaskInterface {
         const {id, name, completed} = task;
         return {id, name, completed};
@@ -40,18 +35,12 @@ export class TasksService {
         //     .where("task.name like :name", {name: '%' + name + '%' })
         //     .getMany()
 
-         const tasks = (await Task.find({
-            where: {
-                name: Like('%' + name + '%')
-            }
-        }));
-
-        console.log(name)
-        console.log(tasks)
-
-
-        return tasks;
-
+            const tasks = (await Task.find({
+                // where: {
+                //     name: Like('%' + name + '%')
+                // }
+            }));
+            return tasks;
     }
 
     async findOne(id: string) {
@@ -91,6 +80,7 @@ export class TasksService {
         };
     }
 
+
     async remove(id: string) {
         if (!id) {
             throw new Error('Task not found!')
@@ -115,5 +105,6 @@ export class TasksService {
         };
 
     }
+
 
 }
