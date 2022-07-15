@@ -31,6 +31,11 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
         }
     });
 
+        console.log("ValidateEEE");
+        console.log(payload)
+        console.log(user)
+
+
         if (!user) {
             return done(new UnauthorizedException(), false);
         }

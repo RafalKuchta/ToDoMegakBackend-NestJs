@@ -67,6 +67,21 @@ export class AuthService {
         }
     };
 
+    async check(user: User, res: Response) {
+        try {
+            if(user.currentTokenId)
+            return res.json({
+                ok: true,
+                email: user.email,
+            });
+        } catch (e) {
+            return res.json({
+                ok: false,
+                error: e.message
+            });
+        }
+    }
+
 
     async logout(user: User, res: Response) {
         console.log(user, res)
