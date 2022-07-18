@@ -4,6 +4,8 @@ import {UpdateTaskDto} from './dto/update-task.dto';
 
 import {TaskInterface} from "../interfaces/task";
 import {Task} from "./entities/task.entity";
+import {Like} from "typeorm";
+import {User} from "../user/user.entity";
 
 @Injectable()
 export class TasksService {
@@ -12,11 +14,13 @@ export class TasksService {
         return {id, name, completed};
     }
 
-    async create(req: CreateTaskDto) {
+    async create(req: CreateTaskDto, user: User) {
+        console.log(user)
         try {
             const task = new Task();
             task.name = req.name;
             task.completed = req.completed;
+            task.user = user.email;
 
             await task.save();
 
@@ -26,7 +30,7 @@ export class TasksService {
 
     }
 
-    async findAll(name: string): Promise<TaskInterface[]> {
+    async findAll(name: string, user: User): Promise<TaskInterface[]> {
 
         // return await AppDataSource.getRepository(Task)
         //     .createQueryBuilder("task")
@@ -36,10 +40,11 @@ export class TasksService {
         //     .getMany()
 
             const tasks = (await Task.find({
-                // where: {
-                //     name: Like('%' + name + '%')
-                // }
+                where: {
+                    user: user.email,
+                }
             }));
+
 
             return tasks;
     }

@@ -1,4 +1,5 @@
-import {BaseEntity, Entity, PrimaryGeneratedColumn, Column} from "typeorm";
+import {BaseEntity, Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn} from "typeorm";
+import {User} from "../../user/user.entity";
 
 @Entity()
 export class Task extends BaseEntity {
@@ -12,4 +13,10 @@ export class Task extends BaseEntity {
 
     @Column()
     completed: boolean;
+
+    @Column({
+        length: 255,
+    })
+    user: string;
+
 }

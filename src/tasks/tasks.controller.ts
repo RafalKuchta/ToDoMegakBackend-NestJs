@@ -3,6 +3,8 @@ import { TasksService } from './tasks.service';
 import { CreateTaskDto } from './dto/create-task.dto';
 import { UpdateTaskDto } from './dto/update-task.dto';
 import {AuthGuard} from "@nestjs/passport";
+import {UserObj} from "../decorators/user-obj.decorator";
+import {User} from "../user/user.entity";
 
 @Controller('todo')
 export class TasksController {
@@ -11,17 +13,19 @@ export class TasksController {
   @Post()
   @UseGuards(AuthGuard('jwt'))
   create(
-      @Body() createTaskDto: CreateTaskDto
+      @Body() createTaskDto: CreateTaskDto,
+      @UserObj() user: User,
   ) {
-    return this.tasksService.create(createTaskDto);
+    return this.tasksService.create(createTaskDto, user);
   }
 
   @Get('/search/:name?')
   @UseGuards(AuthGuard('jwt'))
   findAll(
       @Param() name: string,
+      @UserObj() user: User,
   ) {
-    return this.tasksService.findAll(name ?? '');
+    return this.tasksService.findAll(name ?? '', user);
   }
 
   @Get('/:id')
