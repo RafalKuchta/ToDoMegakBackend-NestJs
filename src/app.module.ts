@@ -5,6 +5,9 @@ import { AppService } from './app.service';
 import { TasksModule } from './tasks/tasks.module';
 import { UserModule } from './user/user.module';
 import {AuthModule} from "./auth/auth.module";
+import { ChatGateway } from './chat/chat.gateway';
+import { ChatModule } from './chat/chat.module';
+import { SmsModule } from './sms/sms.module';
 
 @Module({
   imports: [
@@ -22,9 +25,11 @@ import {AuthModule} from "./auth/auth.module";
       }),
       TasksModule,
       AuthModule,
-      UserModule
+      UserModule,
+      ChatModule,
+      SmsModule
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService, ChatGateway],
 })
 export class AppModule {}

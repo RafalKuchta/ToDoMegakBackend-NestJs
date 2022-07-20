@@ -1,4 +1,4 @@
-import {Injectable} from "@nestjs/common";
+import {ConflictException, HttpException, HttpStatus, Injectable} from "@nestjs/common";
 import {RegisterDto} from "./dto/register.dto";
 import {RegisterUserResponse} from "../interfaces/user";
 import {User} from "./user.entity";
@@ -16,15 +16,16 @@ export class UserService {
       user.email = newUser.email;
       user.pwdHash = hashPwd(newUser.pwd);
 
-      // const userInBase = await User.findOne({where: {email: user.email}})
+      // const findUserinBase = await User.findOne({where: {
+      //         email: newUser.email,
+      //     }});
       //
-      // if (user.email === userInBase.email) {
-      //    console.log("Taki użytkownik już istnieje!")
+      // if (findUserinBase.email){
+      //     throw new ConflictException(`Username: ${findUserinBase.email} is existed`)
       // }
 
-      await user.save();
-
-      return this.filter(user);
+          await user.save();
+          return this.filter(user);
 
   }
 

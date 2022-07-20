@@ -32,21 +32,15 @@ export class TasksService {
 
     async findAll(name: string, user: User): Promise<TaskInterface[]> {
 
-        // return await AppDataSource.getRepository(Task)
-        //     .createQueryBuilder("task")
-        //     .select('task')
-        //     .from(Task, "task")
-        //     .where("task.name like :name", {name: '%' + name + '%' })
-        //     .getMany()
+        const tasks = (await Task.find({
+            where: {
+                user: user.email,
+                name: Like(`%${name}%`)
+            }
+        }))
 
-            const tasks = (await Task.find({
-                where: {
-                    user: user.email,
-                }
-            }));
+        return tasks
 
-
-            return tasks;
     }
 
     async findOne(id: string) {

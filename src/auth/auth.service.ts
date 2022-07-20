@@ -11,7 +11,8 @@ import {JwtPayload} from "./jwt.strategy";
 export class AuthService {
     private createToken(currentTokenId: string): { accessToken: string, expiresIn: number } {
         const payload: JwtPayload = {id: currentTokenId};
-        const expiresIn = 60 * 60 * 24;
+        // const expiresIn = 60 * 60 * 24;
+        const expiresIn = 60 * 60;
         const accessToken = sign(payload, 'JDwoi doi o#OOI F#3fOAoJF*#fooiN hf3OIC OJ o jf#OJCOjoJFo#CO#CoqCMoc#OCMOIDoij oCOMowCOcO#OI3J*#*#*#* FfjCNoo@w*&$08@*&@)*#)(C p9', {expiresIn});
         return {
             accessToken,
