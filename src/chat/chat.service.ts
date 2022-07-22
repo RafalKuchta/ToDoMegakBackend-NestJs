@@ -1,25 +1,40 @@
-import { Injectable } from '@nestjs/common';
-import { CreateChatDto } from './dto/create-chat.dto';
+import {Injectable} from '@nestjs/common';
+import {CreateChatDto} from './dto/create-chat.dto';
+import {User} from "../user/user.entity";
+import {Chat} from "./entities/chat.entity";
+import {ChatInterface} from "../interfaces/chat";
 
 @Injectable()
 export class ChatService {
-  create(createChatDto: CreateChatDto) {
-    return 'This action adds a new chat';
-  }
+    async create(req: CreateChatDto, user: User) {
 
-  findAll() {
-    return `This action returns all chat`;
-  }
+        try {
+            const chat = new Chat();
+            chat.message = req.message;
+            chat.user = user.email;
 
-  findOne(id: number) {
-    return `This action returns a #${id} chat`;
-  }
+            await chat.save();
 
-  update(id: number, updateChatDto: CreateChatDto) {
-    return `This action updates a #${id} chat`;
-  }
+        } catch (e) {
+            throw e;
+        }
+    }
 
-  remove(id: number) {
-    return `This action removes a #${id} chat`;
-  }
+    async findAll(): Promise<ChatInterface[]> {
+        const chats = (await Chat.find())
+
+        return chats;
+    }
+
+    findOne(id: number) {
+        return `This action returns a #${id} chat`;
+    }
+
+    update(id: number, updateChatDto: CreateChatDto) {
+        return `This action updates a #${id} chat`;
+    }
+
+    remove(id: number) {
+        return `This action removes a #${id} chat`;
+    }
 }

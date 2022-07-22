@@ -1,5 +1,4 @@
-import {BaseEntity, Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn} from "typeorm";
-import {User} from "../../user/user.entity";
+import {BaseEntity, Entity, PrimaryGeneratedColumn, Column} from "typeorm";
 
 @Entity()
 export class Task extends BaseEntity {
