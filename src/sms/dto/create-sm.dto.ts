@@ -5,3 +5,10 @@ export class CreateSmDto {
     phone: string;
     group: string;
 }
+
+export class CreateSmsDto {
+    mobile_number?: string;
+    mobile_numbers?: string;
+    message: string;
+}
+
