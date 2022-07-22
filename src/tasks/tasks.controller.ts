@@ -1,4 +1,4 @@
-import {Controller, Get, Post, Body, Patch, Param, Delete, UseGuards, Req} from '@nestjs/common';
+import {Controller, Get, Post, Body, Patch, Param, Delete, UseGuards} from '@nestjs/common';
 import { TasksService } from './tasks.service';
 import { CreateTaskDto } from './dto/create-task.dto';
 import { UpdateTaskDto } from './dto/update-task.dto';
@@ -22,7 +22,7 @@ export class TasksController {
   @Get('/search/:name?')
   @UseGuards(AuthGuard('jwt'))
   findAll(
-      @Param() name: string,
+      @Param('name') name: string,
       @UserObj() user: User,
   ) {
     return this.tasksService.findAll(name ?? '', user);
@@ -30,7 +30,9 @@ export class TasksController {
 
   @Get('/:id')
   @UseGuards(AuthGuard('jwt'))
-  findOne(@Param('id') id: string) {
+  findOne(
+      @Param('id') id: string
+  ) {
     return this.tasksService.findOne(id);
   }
 
