@@ -10,5 +10,9 @@ export class CreateSmsDto {
     mobile_number?: string;
     mobile_numbers?: string;
     message: string;
+    phones: [{
+        phone: string,
+        id: string,
+    }];
 }
 
