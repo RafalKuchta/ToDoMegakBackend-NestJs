@@ -5,6 +5,7 @@ import { UpdateTaskDto } from './dto/update-task.dto';
 import {AuthGuard} from "@nestjs/passport";
 import {UserObj} from "../decorators/user-obj.decorator";
 import {User} from "../user/user.entity";
+import {ACGuard, UseRoles} from "nest-access-control";
 
 @Controller('todo')
 export class TasksController {
@@ -31,17 +32,24 @@ export class TasksController {
   @Get('/:id')
   @UseGuards(AuthGuard('jwt'))
   findOne(
-      @Param('id') id: string
+      @Param('id') id: string,
+      @UserObj() user: User,
   ) {
     return this.tasksService.findOne(id);
   }
 
 
   @Patch('/:id')
-  @UseGuards(AuthGuard('jwt'))
+  @UseGuards(AuthGuard('jwt'), ACGuard)
+  @UseRoles({
+    possession: 'any',
+    action: 'update',
+    resource: 'posts'
+  })
   update(
       @Param('id') id: string,
-      @Body() updateTaskDto: UpdateTaskDto) {
+      @Body() updateTaskDto: UpdateTaskDto)
+  {
     return this.tasksService.update(id, updateTaskDto);
   }
 
