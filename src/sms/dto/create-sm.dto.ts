@@ -2,16 +2,24 @@ export class CreateSmDto {
     name: string;
     surname: string;
     company: string;
+    position: string;
     phone: string;
     group: string;
 }
 
 export class CreateSmsDto {
+    name: string;
+    surname: string;
+    company: string;
+    group: string;
     mobile_number?: string;
-    mobile_numbers?: string;
     message: string;
-    phones: [{
+    phones?: [{
         phone: string,
+        id: string,
+    }];
+    groups?: [{
+        group: string,
         id: string,
     }];
 }
