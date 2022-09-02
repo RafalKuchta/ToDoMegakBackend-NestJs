@@ -3,14 +3,24 @@ export interface AddSmsResponse {
     name: string;
     surname: string;
     company: string;
+    position: string;
     phone: string;
+    groups: {
+        id: string,
+        name: string,
+    };
 }
 
-export interface SendSmsResponse {
+export interface SendGroupResponse {
     id: string;
     name: string;
-    surname: string;
-    company: string;
-    phone: string;
-    sms: string;
+}
+
+export interface SendResponse {
+    message: string;
+}
+
+export interface AddGroupResponse {
+    id: string;
+    name: string;
 }
