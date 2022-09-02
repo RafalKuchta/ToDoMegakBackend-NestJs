@@ -7,21 +7,28 @@ export class Sms extends BaseEntity {
 
     @Column({
         length: 255,
+        default: null,
+        nullable: true,
     })
     name: string;
 
     @Column({
         length: 255,
+        default: null,
+        nullable: true,
     })
     surname: string;
 
     @Column({
         length: 255,
+        default: null,
+        nullable: true,
     })
     company: string;
 
     @Column({
         length: 15,
+        default: null,
     })
     phone: string;
 
