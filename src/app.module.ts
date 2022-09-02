@@ -8,6 +8,8 @@ import {AuthModule} from "./auth/auth.module";
 import { ChatGateway } from './chat/chat.gateway';
 import { ChatModule } from './chat/chat.module';
 import { SmsModule } from './sms/sms.module';
+import { AccessControlModule } from 'nest-access-control';
+import {roles} from "./auth/user.roles";
 
 @Module({
   imports: [
@@ -27,7 +29,8 @@ import { SmsModule } from './sms/sms.module';
       AuthModule,
       UserModule,
       ChatModule,
-      SmsModule
+      SmsModule,
+      AccessControlModule.forRoles(roles),
   ],
   controllers: [AppController],
   providers: [AppService, ChatGateway],
