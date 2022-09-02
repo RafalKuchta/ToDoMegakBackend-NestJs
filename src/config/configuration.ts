@@ -1,0 +1,27 @@
+export default () => ({
+  port: parseInt(process.env.PORT, 10) || 3000,
+  mysql: {
+    name: process.env.DB_DATABASE_SQL,
+    // host: process.env.DB_HOST_SQL,
+    // port: Number(process.env.DB_PORT_SQL),
+    // username: process.env.DB_USERNAME_SQL,
+    // password: process.env.DB_PASSWORD_SQL,
+    type: 'mysql',
+    host: 'localhost',
+    port: 3306,
+    username: 'root',
+    password: '',
+  },
+  postgres: {
+    name: process.env.DB_DATABASE_SQL,
+    // host: process.env.DB_HOST_SQL,
+    // port: Number(process.env.DB_PORT_SQL),
+    // username: process.env.DB_USERNAME_SQL,
+    // password: process.env.DB_PASSWORD_SQL,
+    type: 'postgres',
+    host: 'localhost',
+    port: 5432,
+    username: 'root',
+    password: '',
+  },
+});

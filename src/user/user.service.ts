@@ -1,4 +1,4 @@
-import {ConflictException, HttpException, HttpStatus, Injectable} from "@nestjs/common";
+import {Injectable} from "@nestjs/common";
 import {RegisterDto} from "./dto/register.dto";
 import {RegisterUserResponse} from "../interfaces/user";
 import {User} from "./user.entity";
@@ -7,8 +7,8 @@ import {hashPwd} from "../utils/hash-pwd";
 @Injectable()
 export class UserService {
   filter(user: User): RegisterUserResponse {
-    const {id, email} = user;
-    return {id, email};
+    const {id, email, roles} = user;
+    return {id, email, roles:[]};
   }
 
   async register(newUser: RegisterDto): Promise<RegisterUserResponse> {
@@ -30,7 +30,7 @@ export class UserService {
   }
 
   async getOneUser(id: string): Promise<User> {
-    return await User.findOne({where: {id}});
+      return await User.findOne({where: {id}});
   }
 
 }

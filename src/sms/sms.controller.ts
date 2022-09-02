@@ -1,7 +1,6 @@
-import {Controller, Get, Post, Body, Put, Param, Delete, UseGuards} from '@nestjs/common';
+import {Controller, Get, Post, Body, Param, Delete, UseGuards, Patch} from '@nestjs/common';
 import { SmsService } from './sms.service';
-import { CreateSmDto } from './dto/create-sm.dto';
-import { UpdateSmDto } from './dto/update-sm.dto';
+import {CreateSmDto, CreateSmsDto} from './dto/create-sm.dto';
 import {AuthGuard} from "@nestjs/passport";
 import {UserObj} from "../decorators/user-obj.decorator";
 import {User} from "../user/user.entity";
@@ -10,7 +9,7 @@ import {User} from "../user/user.entity";
 export class SmsController {
   constructor(private readonly smsService: SmsService) {}
   
-  @Post('/')
+  @Post('/add-phone')
   @UseGuards(AuthGuard('jwt'))
   create(
       @Body() createSmDto: CreateSmDto,
@@ -19,22 +18,41 @@ export class SmsController {
     return this.smsService.create(createSmDto);
   }
 
-  @Get('/get-all')
+  @Post('/sms-send')
   @UseGuards(AuthGuard('jwt'))
-  findAll(
+  send(
+      @Body() createSmsDto: CreateSmsDto,
       @UserObj() user: User,
   ) {
-    return this.smsService.findAll(user);
+    return this.smsService.send(createSmsDto);
+  }
+
+  @Get('/get-all')
+  @UseGuards(AuthGuard('jwt'))
+  findAll() {
+    return this.smsService.findAll();
+  }
+
+  @Get('/groups/get-all')
+  @UseGuards(AuthGuard('jwt'))
+  findAllGroups() {
+    return this.smsService.findAllGroups();
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.smsService.findOne(+id);
+  @UseGuards(AuthGuard('jwt'))
+  findOneNumber(
+      @Param('id') id: string
+  ) {
+    return this.smsService.findOneNumber(id);
   }
 
-  @Put(':id')
-  update(@Param('id') id: string, @Body() updateSmDto: UpdateSmDto) {
-    return this.smsService.update(+id, updateSmDto);
+  @Patch(':id')
+  @UseGuards(AuthGuard('jwt'))
+  update(
+      @Param('id') id: string,
+      @Body() CreateSmDto: CreateSmDto) {
+    return this.smsService.update(id, CreateSmDto);
   }
 
   @Delete(':id')

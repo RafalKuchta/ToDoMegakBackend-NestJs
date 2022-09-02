@@ -10,7 +10,7 @@ export class Chat extends BaseEntity {
     id: string;
 
     @Column({
-        length: 99999
+        length: 9999
     })
     message: string;
 
@@ -20,7 +20,6 @@ export class Chat extends BaseEntity {
     user: string;
 
     @Column({
-        type: 'datetime',
         default: () => 'NOW()',
     })
     created_at: Date;

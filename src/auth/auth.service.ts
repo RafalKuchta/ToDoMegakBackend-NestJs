@@ -73,6 +73,7 @@ export class AuthService {
             return res.json({
                 ok: true,
                 email: user.email,
+                roles: user.roles,
             });
         } catch (e) {
             return res.json({
