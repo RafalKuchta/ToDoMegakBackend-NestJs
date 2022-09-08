@@ -21,9 +21,9 @@
 
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
-import configuration from './Utils/config/configuration';
+import configuration from './utils/config/configuration';
 import * as cookieParser from 'cookie-parser';
-import { whitelistCors } from './Utils/config/cors-config';
+import { whitelistCors } from './utils/config/cors-config';
 import { NestExpressApplication } from '@nestjs/platform-express';
 import helmet from 'helmet';
 
