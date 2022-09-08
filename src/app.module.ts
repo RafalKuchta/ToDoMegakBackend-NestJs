@@ -10,20 +10,23 @@ import { ChatModule } from './chat/chat.module';
 import { SmsModule } from './sms/sms.module';
 import { AccessControlModule } from 'nest-access-control';
 import {roles} from "./auth/user.roles";
+import {ConfigModule} from "@nestjs/config";
+import configuration from "./utils/config/configuration";
 
 @Module({
   imports: [
+      ConfigModule.forRoot(),
       TypeOrmModule.forRoot({
-          "type": "mysql",
-          "host": "localhost",
-          "port": 3306,
-          "username": "root",
-          "password": "",
-          "database": "todo_megak_proj_koncowy_nest",
-          "entities": ["dist/**/**.entity{.ts,.js}"],
-          "bigNumberStrings": false,
-          "logging": true,
-          "synchronize": true
+          type: 'mysql',
+          host: configuration().databaseMaria.host,
+          port: configuration().databaseMaria.port,
+          username: configuration().databaseMaria.username,
+          password: configuration().databaseMaria.password,
+          database: configuration().databaseMaria.name,
+          entities: ['dist/**/**.entity{.ts,.js}'],
+          bigNumberStrings: false,
+          logging: false,
+          synchronize: false,
       }),
       TasksModule,
       AuthModule,
