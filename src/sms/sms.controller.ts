@@ -27,6 +27,15 @@ export class SmsController {
     return this.smsService.send(createSmsDto);
   }
 
+  @Get('/sms-sent/:id')
+  @UseGuards(AuthGuard('jwt'))
+  getAllSent(
+    @Param() date: string,
+    @UserObj() user: User,
+  ) {
+    return this.smsService.getAllSent(date);
+  }
+
   @Get('/get-all')
   @UseGuards(AuthGuard('jwt'))
   findAll() {
