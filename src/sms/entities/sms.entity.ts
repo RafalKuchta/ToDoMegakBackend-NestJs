@@ -44,4 +44,10 @@ export class Sms extends BaseEntity {
     })
     sms: string;
 
+    @Column({
+        type: 'datetime',
+        default: () => 'NOW()',
+    })
+    created_at: string;
+
 }
