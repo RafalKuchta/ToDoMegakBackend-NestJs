@@ -8,6 +8,7 @@ import {
 import {Phone} from "./entities/phone.entity";
 import {Sms} from "./entities/sms.entity";
 import {Group} from "./entities/group.entity";
+import {Like} from "typeorm";
 
 
 @Injectable()
@@ -30,7 +31,7 @@ export class SmsService {
         phone.surname = createSmDto.surname;
         phone.company = createSmDto.company;
         phone.position = createSmDto.position;
-        phone.phone = createSmDto.phone;
+        phone.phone = "+48" + createSmDto.phone;
 
         await phone.save();
 
@@ -39,7 +40,7 @@ export class SmsService {
 
     async send(createSmsDto: CreateSmsDto): Promise<SendResponse> {
         const sms = new Sms();
-        sms.phone = createSmsDto.mobile_number;
+        sms.phone = "+48" + createSmsDto.mobile_number;
         sms.sms = createSmsDto.message;
 
         if (createSmsDto.mobile_number.length > 5) {
@@ -100,6 +101,20 @@ export class SmsService {
             message: 'ok',
         };
 
+    }
+
+    async getAllSent(date) {
+        // const perPage = 10;
+        // const page = 1;
+        // const skip = (perPage * page) - perPage;
+
+        return await Sms.find({
+            // take: perPage,
+            // skip,
+            where: {
+                created_at: Like(`${date.id}%`),
+            }
+        });
     }
 
     async findAll(): Promise<AddSmsResponse[]> {
