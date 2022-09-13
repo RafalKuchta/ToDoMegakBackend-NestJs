@@ -43,8 +43,11 @@ export class SmsService {
         sms.phone = "+48" + createSmsDto.mobile_number;
         sms.sms = createSmsDto.message;
 
-        if (createSmsDto.mobile_number.length > 5) {
+        if (createSmsDto.mobile_number.length === 9) {
             await sms.save();
+            return {
+                message: 'ok',
+            }
         }
 
         if (createSmsDto.phones) {
