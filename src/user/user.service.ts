@@ -1,11 +1,17 @@
-import {Injectable} from "@nestjs/common";
+import {Inject, Injectable} from "@nestjs/common";
 import {RegisterDto} from "./dto/register.dto";
 import {RegisterUserResponse} from "../interfaces/user";
 import {User} from "./user.entity";
 import {hashPwd} from "../utils/hash-pwd";
+import {MailService} from "../mail/mail.service";
+import {registeredNewUserInfo} from "../templates/email/registered-new-user-info";
 
 @Injectable()
 export class UserService {
+    constructor(
+      @Inject(MailService) private mailService: MailService,
+    ) {}
+
   filter(user: User): RegisterUserResponse {
     const {id, email, roles} = user;
     return {id, email, roles:[]};
@@ -25,6 +31,9 @@ export class UserService {
       // }
 
           await user.save();
+
+          await this.mailService.sendMail('r.kuchta@gba-polska.pl', 'Rejestracja użytkownika.', registeredNewUserInfo(user.email))
+
           return this.filter(user);
 
   }
