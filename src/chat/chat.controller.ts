@@ -15,7 +15,6 @@ export class ChatController {
       @Body() createChatDto: CreateChatDto,
       @UserObj() user: User,
   ) {
-    console.log(createChatDto)
     return this.chatService.create(createChatDto, user);
   }
 
