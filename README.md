@@ -1,20 +1,20 @@
 ##Description
 
-###To Do List Module:
+###To Do List Module:<br/>
 The application was created during the MegaK course as ToDo List.
 You can add tasks, edit, mark as done, delete and filter.
 Then the app was expanded with new functions.
 
 ![img_2.png](img_2.png)
 
-###User Module:
+###User Module:<br/>
 The User module has been added, in which we can register a new user. The database (mysql or postgres) will save the email and the encrypted password using the algorithm - sha512.
 We can also assign roles to an Admin or Reader user.
 
 ![img.png](img.png)
 
 
-###Auth Module:
+###Auth Module:<br/>
 Then the Auth module was added, in which we can log in or log out the user.
 When logging in, the user and password are checked in the database, then the user token is created and saved in the database.
 The 'jwt' cookie is sent to the browser as httpOnly.
@@ -22,13 +22,13 @@ When logging in again, the frontend sends back 'jwt' and the token is compared w
 
 Logging out removes the token from the database and from the cookie "jwt" from the browser.
 
-####Register
+####Register<br/>
 ![img_3.png](img_3.png)
 
-####Login
+####Login<br/>
 ![img_4.png](img_4.png)
 
-###SMS Module:
+###SMS Module:<br/>
 Then an SMS module was added for sending single text messages and sending text messages to the created groups.
 In this module, you can add a telephone number along with other data (name, surname, company, location, group) to the database. We can edit the given number and other data.
 By sending a single text message or to a group, information about the content of the text message and the user is saved in the database. Then the database handles the sending of text messages to the operator.
@@ -43,25 +43,25 @@ You can check the list of numbers in the database.
 
 ![img_8.png](img_8.png)
 
-###Chat Module:
+###Chat Module:<br/>
 Then the Chat module was created.
 The module enables the exchange of information between logged in people in real time.
 
 ![img_1.png](img_1.png)
 
-###Mail Module:
+###Mail Module:<br/>
 Then the Mailer module was added, which in this application allows you to send an email after registering a new user.
 
-###.env file
+###.env file<br/>
 The server data and data for logging into the database are stored in an .env file.
 
-## Installation
+## Installation<br/>
 
 ```bash
 $ npm install
 ```
 
-## Running the app
+## Running the app<br/>
 
 ```bash
 # development
