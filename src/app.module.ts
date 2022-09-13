@@ -11,6 +11,7 @@ import { SmsModule } from './sms/sms.module';
 import { AccessControlModule } from 'nest-access-control';
 import {roles} from "./auth/user.roles";
 import {ConfigModule} from "@nestjs/config";
+import { MailModule } from './mail/mail.module';
 import configuration from "./utils/config/configuration";
 
 @Module({
@@ -34,6 +35,7 @@ import configuration from "./utils/config/configuration";
       ChatModule,
       SmsModule,
       AccessControlModule.forRoles(roles),
+      MailModule,
   ],
   controllers: [AppController],
   providers: [AppService, ChatGateway],
