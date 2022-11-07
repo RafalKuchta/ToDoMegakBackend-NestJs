@@ -4,6 +4,7 @@ import {
   Post,
   Body,
   Param,
+  Delete,
   UseGuards,
   Patch,
 } from '@nestjs/common';
@@ -58,5 +59,11 @@ export class SmsController {
   @UseGuards(AuthGuard('jwt'))
   update(@Param('id') id: string, @Body() CreateSmDto: CreateSmDto) {
     return this.smsService.update(id, CreateSmDto);
+  }
+
+  @Delete(':id')
+  @UseGuards(AuthGuard('jwt'))
+  remove(@Param('id') id: string) {
+    return this.smsService.remove(+id);
   }
 }
